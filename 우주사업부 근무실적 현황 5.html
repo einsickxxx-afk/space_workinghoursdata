@@ -24,7 +24,7 @@
   --page-bg:#EEF3F7;
   --card-bg:#FFFFFF;
   --muted:#6C8098;
-  --clay-bg:#968275;
+  --clay-bg:#F3E8E1;
   --border:#E7EEF4;
 }
 
@@ -157,14 +157,14 @@ tbody tr:last-child td{ border-bottom:none; }
 .tag.w3{ background:#FCEFDD; color:#C97A2B; }
 .tag.w2{ background:#EEF3F7; color:var(--steel); }
 .heatmap-wrap{ overflow-x:auto; }
-   #riskHeatmapTable{ width:100%; border-copllapse:collapse; font-size:12.5px }
+   #riskHeatmapTable{ width:100%; border-collapse:collapse; font-size:12.5px }
    #riskHeatmapTable th{ text-align:left; font-size:11px; color:var(--muted); font-weight:800; padding:9px 8px; border-bottom:1.5px solid var(--border); white-space:nowrap; }
-   #riskHeatmapTable the.week-col{ text-align:center; }
+   #riskHeatmapTable th.week-col{ text-align:center; }
    #riskHeatmapTable td{ padding:6px 8px; border-bottom:1px solid #F1F5F8; }
    .heat-cell{ width:36px; height:26px; border-radius:6px; margin:0 auto; }
-   .heat-cell.over{ backgrounnd:var(--beige); }
-   .heat-cell.under{ backgroud:#EEF3F7; }
-   .heat-cell.na{ backgrounnd:transparent; border:1px dashed var(--border);}
+   .heat-cell.over{ background:var(--clay); }
+   .heat-cell.under{ background:#EEF3F7; }
+   .heat-cell.na{ background:transparent; border:1px dashed var(--border);}
 .footer-note{ margin-top:16px; font-size:11px; color:var(--muted); font-weight:600; }
 
 .error-banner{
@@ -317,7 +317,7 @@ tbody tr:last-child td{ border-bottom:none; }
       <span class="panel-note">2주 이상 연속 52시간</span>
     </div>
     <div class="heatmap-wrap">
-      <table id="riskHeatmapTable"></table>table>
+      <table id="riskHeatmapTable"></table>
     </div>
   </div>
 
@@ -2159,6 +2159,7 @@ function renderRiskTable(rows, weekKeys, latest){
     }
     if(streak >= 2){
       risk.push({ ...e, streak, latestQ: e.weeks[latest] });
+    }
   });
   risk.sort((a,b) => b.streak - a.streak || (b.latestQ||0) - (a.latestQ||0));
 
@@ -2166,10 +2167,11 @@ function renderRiskTable(rows, weekKeys, latest){
   const maxStreak = risk.length ? Math.max(...risk.map(r=>r.streak)) : 0;
   document.getElementById('kpiRiskSub').textContent = maxStreak>=3 ? `${maxStreak}주 연속 52시간 포함` : '\u00A0';
 
+  const heatWeeks=weekKeys.slice(-6);
   const table = document.getElementById('riskHeatmapTable');
   const weekLabels = weekKeys.map(wk=>{
    const [yyyymm,wn]=wk.split('-');
-   return '${yyyymm.slice(4,6)}/${parseInt(wn,10)}주`;
+   return '`${yyyymm.slice(4,6)}/${parseInt(wn,10)}주`;
   });
    
   const headerHtml=`<thead><tr>
@@ -2178,7 +2180,7 @@ function renderRiskTable(rows, weekKeys, latest){
    <th>연속</th>
   </tr></thead>`;
 
-   const bodyHTml=risk.slice(0,20).map(r=>{
+   const bodyHtml=risk.slice(0,20).map(r=>{
       const cells=weekKeys.map(wk=>{
          const q=r.weeks[wk]
          let cls='na',title='데이터 없음';
