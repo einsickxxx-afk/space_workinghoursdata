@@ -11,11 +11,11 @@
    복사됩니다. 여기에 직접 붙여넣으면 영구 반영됩니다.
    ========================================================= */
 :root{
-  --navy:#0D2744;      /* 진한 텍스트/헤더 */
-  --steel:#53728A;     /* 보조 텍스트/차트 */
-  --skyblue:#7691AD;   /* 차트 보조색 */
-  --pale:#B9CFDD;      /* 연한 배경/트랙 */
-  --coral:#E2646C;     /* 경고/52시간 강조색 */
+  --brown:#3A2119;      /* 진한 텍스트/헤더 */
+  --steel:#79A3C3;     /* 보조 텍스트/차트 */
+  --skyblue:#d2E2EC;   /* 차트 보조색 */
+  --beige:#EBCDB7;      /* 연한 배경/트랙 */
+  --clay:#957662;     /* 경고/52시간 강조색 */
   --font-main:'Pretendard','Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;
 }
 /* ========================================================= */
@@ -24,7 +24,7 @@
   --page-bg:#EEF3F7;
   --card-bg:#FFFFFF;
   --muted:#6C8098;
-  --coral-bg:#FCE7E8;
+  --clay-bg:#968275;
   --border:#E7EEF4;
 }
 
@@ -32,7 +32,7 @@
 body{
   margin:0;
   background:var(--page-bg);
-  color:var(--navy);
+  color:var(--brown);
   font-family:var(--font-main);
   min-height:100vh;
 }
@@ -55,7 +55,7 @@ body{
 .icon-btn:hover{ background:#F5F8FB; }
 
 .load-btn{
-  background:var(--navy); color:#fff; border:none; border-radius:999px;
+  background:var(--brown); color:#fff; border:none; border-radius:999px;
   padding:10px 18px; font-size:12.5px; font-weight:700; cursor:pointer;
   display:flex; align-items:center; gap:6px;
 }
@@ -65,12 +65,12 @@ body{
 .filters{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; align-items:center; }
 .filters select{
   background:#fff; border:1px solid var(--border); border-radius:999px;
-  padding:9px 16px; font-size:12.5px; color:var(--navy); font-weight:600;
+  padding:9px 16px; font-size:12.5px; color:var(--brown); font-weight:600;
   font-family:var(--font-main);
 }
 .switch-pill{
   display:flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--border);
-  border-radius:999px; padding:8px 16px; font-size:12.5px; font-weight:600; color:var(--navy);
+  border-radius:999px; padding:8px 16px; font-size:12.5px; font-weight:600; color:var(--brown);
 }
 .data-status{ font-size:11.5px; color:var(--muted); font-weight:600; margin-left:auto; }
 
@@ -92,7 +92,7 @@ body{
 }
 .donut::after{ content:""; position:absolute; width:70px; height:70px; border-radius:50%; background:#fff; }
 .donut-label{ position:relative; z-index:1; text-align:center; }
-.donut-label b{ display:block; font-size:19px; font-weight:800; color:var(--coral); }
+.donut-label b{ display:block; font-size:19px; font-weight:800; color:var(--clay); }
 .donut-label span{ font-size:10px; color:var(--muted); font-weight:700; }
 .donut-side p.kpi-label{ margin:0 0 6px; font-size:12px; color:var(--muted); font-weight:700; }
 .donut-side p.kpi-value{ margin:0; font-size:21px; font-weight:800; }
@@ -102,29 +102,29 @@ body{
 .stat-card p.kpi-value{ margin:0; font-size:25px; font-weight:800; }
 .stat-card p.kpi-value .unit{ font-size:13px; color:var(--muted); font-weight:600; margin-left:3px; }
 .stat-card p.kpi-sub{ margin:8px 0 0; font-size:11.5px; color:var(--muted); }
-.stat-card p.kpi-sub.alert{ color:var(--coral); font-weight:700; }
+.stat-card p.kpi-sub.alert{ color:var(--clay); font-weight:700; }
 
 .row2{ display:grid; grid-template-columns:1.35fr 1fr; gap:16px; margin-bottom:16px; }
 .row2b{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
 @media (max-width:900px){ .row2, .row2b{ grid-template-columns:1fr; } }
 
-.legend-dash{ display:flex; align-items:center; gap:5px; font-size:11px; color:var(--coral); font-weight:700; }
-.legend-dash .d{ width:14px; border-top:2px dashed var(--coral); display:inline-block; }
+.legend-dash{ display:flex; align-items:center; gap:5px; font-size:11px; color:var(--clay); font-weight:700; }
+.legend-dash .d{ width:14px; border-top:2px dashed var(--clay); display:inline-block; }
 
 .linechart{ width:100%; height:170px; display:block; }
 
 .hbar-row{ display:flex; align-items:center; gap:10px; margin-bottom:11px; }
-.hbar-name{ width:130px; font-size:12.5px; color:var(--navy); font-weight:600; flex-shrink:0; }
+.hbar-name{ width:130px; font-size:12.5px; color:var(--brown); font-weight:600; flex-shrink:0; }
 .hbar-track{ flex:1; height:18px; background:#EEF3F7; border-radius:999px; position:relative; }
 .hbar-fill{ height:100%; border-radius:999px; }
 .hbar-val{ width:44px; flex-shrink:0; text-align:right; font-size:12.5px; font-weight:800; }
-.ceiling-tick{ position:absolute; left:92.86%; top:-4px; bottom:-4px; width:0; border-left:2px dashed var(--coral); z-index:2; }
+.ceiling-tick{ position:absolute; left:92.86%; top:-4px; bottom:-4px; width:0; border-left:2px dashed var(--clay); z-index:2; }
 
 .vbars{ display:flex; align-items:flex-end; gap:12px; height:150px; padding-top:8px; }
 .vbar-col{ flex:1; display:flex; flex-direction:column; align-items:center; gap:8px; height:100%; justify-content:flex-end; }
 .vbar{ width:100%; border-radius:10px 10px 4px 4px; min-height:2px; }
 .vbar-label{ font-size:11px; color:var(--muted); font-weight:600; text-align:center; }
-.vbar-val{ font-size:12px; font-weight:800; color:var(--navy); }
+.vbar-val{ font-size:12px; font-weight:800; color:var(--brown); }
 
 .pie-row{ display:flex; justify-content:center; align-items:center; }
 .pie-svg{ width:260px; height:260px; flex-shrink:0; }
@@ -134,8 +134,8 @@ body{
 
 .weekend-stat{ display:flex; flex-direction:column; gap:12px; justify-content:center; height:100%; }
 .weekend-row{ display:flex; align-items:center; justify-content:space-between; background:#F6F9FB; border-radius:16px; padding:14px 18px; }
-.weekend-row .wname{ font-size:13px; font-weight:700; color:var(--navy); }
-.weekend-row .wnum{ font-size:20px; font-weight:800; color:var(--coral); }
+.weekend-row .wname{ font-size:13px; font-weight:700; color:var(--brown); }
+.weekend-row .wnum{ font-size:20px; font-weight:800; color:var(--clay); }
 .weekend-row .wsub{ font-size:11px; color:var(--muted); font-weight:600; }
 
 .diverge-row{ position:relative; height:150px; display:flex; margin-top:10px; }
@@ -144,7 +144,7 @@ body{
 .diverge-bar{ position:absolute; left:50%; width:46px; margin-left:-23px; z-index:1; }
 .diverge-bar.up{ bottom:50%; border-radius:10px 10px 4px 4px; }
 .diverge-bar.down{ top:50%; border-radius:4px 4px 10px 10px; }
-.diverge-val{ position:absolute; left:50%; transform:translateX(-50%); font-size:12.5px; font-weight:800; color:var(--navy); white-space:nowrap; z-index:2; }
+.diverge-val{ position:absolute; left:50%; transform:translateX(-50%); font-size:12.5px; font-weight:800; color:var(--brown); white-space:nowrap; z-index:2; }
 .diverge-labels{ display:flex; margin-top:8px; }
 .diverge-labels span{ flex:1; text-align:center; font-size:11.5px; color:var(--muted); font-weight:600; }
 
@@ -153,14 +153,14 @@ thead th{ text-align:left; font-size:11px; color:var(--muted); font-weight:800; 
 tbody td{ padding:11px 10px; border-bottom:1px solid #F1F5F8; font-weight:600; }
 tbody tr:last-child td{ border-bottom:none; }
 .tag{ display:inline-block; padding:4px 12px; border-radius:999px; font-size:11px; font-weight:800; }
-.tag.w4{ background:var(--coral-bg); color:var(--coral); }
+.tag.w4{ background:var(--clay-bg); color:var(--clay); }
 .tag.w3{ background:#FCEFDD; color:#C97A2B; }
 .tag.w2{ background:#EEF3F7; color:var(--steel); }
 
 .footer-note{ margin-top:16px; font-size:11px; color:var(--muted); font-weight:600; }
 
 .error-banner{
-  background:var(--coral-bg); color:var(--coral); border:1px solid var(--coral);
+  background:var(--clay-bg); color:var(--clay); border:1px solid var(--clay);
   border-radius:14px; padding:14px 18px; font-size:13px; font-weight:700;
   margin-bottom:16px; line-height:1.5;
 }
@@ -186,8 +186,8 @@ tbody tr:last-child td{ border-bottom:none; }
 .settings-actions button{
   border:none; border-radius:10px; padding:11px; font-size:12.5px; font-weight:700; cursor:pointer;
 }
-.btn-primary{ background:var(--navy); color:#fff; }
-.btn-secondary{ background:#F1F5F8; color:var(--navy); }
+.btn-primary{ background:var(--brown); color:#fff; }
+.btn-secondary{ background:#F1F5F8; color:var(--brown); }
 .code-box{
   margin-top:12px; background:#0D2744; color:#CFE0EE; font-size:11px; border-radius:10px;
   padding:12px; max-height:160px; overflow:auto; white-space:pre-wrap; word-break:break-all; display:none;
@@ -207,7 +207,7 @@ tbody tr:last-child td{ border-bottom:none; }
     <div class="topbar-actions">
       <button class="load-btn" id="loadBtn">CSV 불러오기</button>
       <input type="file" id="fileInput" accept=".csv">
-      <button class="load-btn" id="exportBtn" style="background:var(--coral);">완성 파일로 저장</button>
+      <button class="load-btn" id="exportBtn" style="background:var(--clay);">완성 파일로 저장</button>
       <button class="icon-btn" id="settingsBtn" title="색상·폰트 설정">⚙</button>
     </div>
   </div>
@@ -325,11 +325,11 @@ tbody tr:last-child td{ border-bottom:none; }
 
     <div class="settings-group">
       <label>색상</label>
-      <div class="color-row"><span>주요 텍스트/헤더</span><input type="color" id="c-navy" value="#0D2744"></div>
+      <div class="color-row"><span>주요 텍스트/헤더</span><input type="color" id="c-brown" value="#0D2744"></div>
       <div class="color-row"><span>보조 텍스트/차트</span><input type="color" id="c-steel" value="#53728A"></div>
       <div class="color-row"><span>차트 보조색</span><input type="color" id="c-skyblue" value="#7691AD"></div>
-      <div class="color-row"><span>연한 배경/트랙</span><input type="color" id="c-pale" value="#B9CFDD"></div>
-      <div class="color-row"><span>경고/52시간 강조</span><input type="color" id="c-coral" value="#E2646C"></div>
+      <div class="color-row"><span>연한 배경/트랙</span><input type="color" id="c-beige" value="#B9CFDD"></div>
+      <div class="color-row"><span>경고/52시간 강조</span><input type="color" id="c-clay" value="#E2646C"></div>
     </div>
 
     <div class="settings-group">
@@ -1932,7 +1932,7 @@ function renderKpis(latestRows, weekKeys, allRows){
   document.getElementById('kpiCountSub').innerHTML = deltaTxt;
 
   document.getElementById('donut').style.background =
-    `conic-gradient(var(--coral) 0% ${ratio}%, #EAF0F5 ${ratio}% 100%)`;
+    `conic-gradient(var(--clay) 0% ${ratio}%, #EAF0F5 ${ratio}% 100%)`;
 
   const avg = total ? latestRows.reduce((s,r)=>s+r._Q,0)/total : 0;
   document.getElementById('kpiAvg').innerHTML = fmt1(avg)+'<span class="unit">시간</span>';
@@ -1977,7 +1977,7 @@ function renderTrend(rows, weekKeysFull){
   }).join('');
   svg.innerHTML = `
     <polyline fill="none" stroke="var(--steel)" stroke-width="3" points="${line}"/>
-    ${pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="${i===pts.length-1?5:4}" fill="var(--navy)" ${i===pts.length-1?'stroke="#fff" stroke-width="2"':''}/>`).join('')}
+    ${pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="${i===pts.length-1?5:4}" fill="var(--brown)" ${i===pts.length-1?'stroke="#fff" stroke-width="2"':''}/>`).join('')}
     ${labels}
   `;
   const labelsEl = document.getElementById('trendLabels');
@@ -2006,7 +2006,7 @@ function renderDeptRanking(latestRows){
   const el = document.getElementById('deptRanking');
   el.innerHTML = items.map(i => {
     const pct = (i.avg/axisMax*100).toFixed(1);
-    const color = i.avg>=52 ? 'var(--coral)' : i.avg>=48 ? 'var(--steel)' : i.avg>=44 ? 'var(--skyblue)' : 'var(--pale)';
+    const color = i.avg>=52 ? 'var(--clay)' : i.avg>=48 ? 'var(--steel)' : i.avg>=44 ? 'var(--skyblue)' : 'var(--beige)';
     return `<div class="hbar-row">
       <div class="hbar-name">${i.team}</div>
       <div class="hbar-track"><div class="hbar-fill" style="width:${pct}%;background:${color}"></div><div class="ceiling-tick" style="left:${(52/axisMax*100).toFixed(2)}%"></div></div>
@@ -2030,8 +2030,8 @@ function renderBuckets(latestRows){
     else idx = 5; // 52시간 이상도 여기로 통합
     counts[idx]++;
   });
-  const colors = ['var(--pale)','#CFE0EC','var(--skyblue)','#5F84A0','var(--steel)','var(--coral)'];
-  const textColors = ['var(--navy)','var(--navy)','#fff','#fff','#fff','#fff'];
+  const colors = ['var(--beige)','#CFE0EC','var(--skyblue)','#5F84A0','var(--steel)','var(--clay)'];
+  const textColors = ['var(--brown)','var(--brown)','#fff','#fff','#fff','#fff'];
   const total = counts.reduce((a,b)=>a+b,0) || 1;
 
   const cx=160, cy=160, r=150;
@@ -2086,11 +2086,11 @@ function renderWeekday(latestRows){
     const h = Math.abs(dev)*scale;
     if(dev >= 0){
       const bottom = 75 + h + GAP;
-      const color = dev === Math.max(...devs) ? 'var(--navy)' : 'var(--steel)';
+      const color = dev === Math.max(...devs) ? 'var(--brown)' : 'var(--steel)';
       return `<div class="diverge-col"><span class="diverge-val" style="bottom:${bottom}px;">${fmt2(avgs[i])}</span><div class="diverge-bar up" style="height:${h}px;background:${color}"></div></div>`;
     }else{
       const bottom = Math.max(2, 75 - h - LBLH);
-      const color = dev === Math.min(...devs) ? 'var(--coral)' : 'var(--skyblue)';
+      const color = dev === Math.min(...devs) ? 'var(--clay)' : 'var(--skyblue)';
       return `<div class="diverge-col"><span class="diverge-val" style="bottom:${bottom}px;">${fmt2(avgs[i])}</span><div class="diverge-bar down" style="height:${h}px;background:${color}"></div></div>`;
     }
   }).join('');
@@ -2125,7 +2125,7 @@ function renderSiteRanking(latestRows){
   const el = document.getElementById('siteRanking');
   el.innerHTML = items.map(i => {
     const pct = (i.avg/axisMax*100).toFixed(1);
-    const color = i.avg>=52 ? 'var(--coral)' : i.avg>=48 ? 'var(--steel)' : i.avg>=44 ? 'var(--skyblue)' : 'var(--pale)';
+    const color = i.avg>=52 ? 'var(--clay)' : i.avg>=48 ? 'var(--steel)' : i.avg>=44 ? 'var(--skyblue)' : 'var(--beige)';
     return `<div class="hbar-row">
       <div class="hbar-name">${i.site}</div>
       <div class="hbar-track"><div class="hbar-fill" style="width:${pct}%;background:${color}"></div><div class="ceiling-tick" style="left:${(52/axisMax*100).toFixed(2)}%"></div></div>
@@ -2170,7 +2170,7 @@ function renderRiskTable(rows, weekKeys, latest){
 }
 
 /* ===================== 설정 패널 ===================== */
-const DEFAULT_COLORS = { navy:'#0D2744', steel:'#53728A', skyblue:'#7691AD', pale:'#B9CFDD', coral:'#E2646C' };
+const DEFAULT_COLORS = { brown:'#0D2744', steel:'#53728A', skyblue:'#7691AD', beige:'#B9CFDD', clay:'#E2646C' };
 const DEFAULT_FONT = "'Pretendard','Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif";
 
 document.getElementById('settingsBtn').addEventListener('click', () => document.getElementById('settingsOverlay').classList.add('open'));
@@ -2178,37 +2178,37 @@ document.getElementById('closeSettings').addEventListener('click', () => documen
 
 function applyColorsAndFont(){
   const root = document.documentElement.style;
-  root.setProperty('--navy', document.getElementById('c-navy').value);
+  root.setProperty('--brown', document.getElementById('c-brown').value);
   root.setProperty('--steel', document.getElementById('c-steel').value);
   root.setProperty('--skyblue', document.getElementById('c-skyblue').value);
-  root.setProperty('--pale', document.getElementById('c-pale').value);
-  root.setProperty('--coral', document.getElementById('c-coral').value);
+  root.setProperty('--beige', document.getElementById('c-beige').value);
+  root.setProperty('--clay', document.getElementById('c-clay').value);
   root.setProperty('--font-main', document.getElementById('fontSelect').value);
   render(); // 차트 내부 색상(그라디언트 등)을 재계산해 반영
 }
-['c-navy','c-steel','c-skyblue','c-pale','c-coral'].forEach(id=>{
+['c-brown','c-steel','c-skyblue','c-beige','c-clay'].forEach(id=>{
   document.getElementById(id).addEventListener('input', applyColorsAndFont);
 });
 document.getElementById('fontSelect').addEventListener('change', applyColorsAndFont);
 document.getElementById('applyBtn').addEventListener('click', () => { applyColorsAndFont(); document.getElementById('settingsOverlay').classList.remove('open'); });
 
 document.getElementById('resetBtn').addEventListener('click', () => {
-  document.getElementById('c-navy').value = DEFAULT_COLORS.navy;
+  document.getElementById('c-brown').value = DEFAULT_COLORS.brown;
   document.getElementById('c-steel').value = DEFAULT_COLORS.steel;
   document.getElementById('c-skyblue').value = DEFAULT_COLORS.skyblue;
-  document.getElementById('c-pale').value = DEFAULT_COLORS.pale;
-  document.getElementById('c-coral').value = DEFAULT_COLORS.coral;
+  document.getElementById('c-beige').value = DEFAULT_COLORS.beige;
+  document.getElementById('c-clay').value = DEFAULT_COLORS.clay;
   document.getElementById('fontSelect').value = DEFAULT_FONT;
   applyColorsAndFont();
 });
 
 document.getElementById('copyBtn').addEventListener('click', () => {
   const code = `:root{
-  --navy:${document.getElementById('c-navy').value};
+  --brown:${document.getElementById('c-brown').value};
   --steel:${document.getElementById('c-steel').value};
   --skyblue:${document.getElementById('c-skyblue').value};
-  --pale:${document.getElementById('c-pale').value};
-  --coral:${document.getElementById('c-coral').value};
+  --beige:${document.getElementById('c-beige').value};
+  --clay:${document.getElementById('c-clay').value};
   --font-main:${document.getElementById('fontSelect').value};
 }`;
   const box = document.getElementById('codeBox');
