@@ -156,7 +156,15 @@ tbody tr:last-child td{ border-bottom:none; }
 .tag.w4{ background:var(--clay-bg); color:#FCEFDD; }
 .tag.w3{ background:#FCEFDD; color:#C97A2B; }
 .tag.w2{ background:#EEF3F7; color:var(--steel); }
-
+.heatmap-wrap{ overflow-x:auto; }
+   #riskHeatmapTable{ width:100%; border-copllapse:collapse; font-size:12.5px }
+   #riskHeatmapTable th{ text-align:left; font-size:11px; color:var(--muted); font-weight:800; padding:9px 8px; border-bottom:1.5px solid var(--border); white-space:nowrap; }
+   #riskHeatmapTable the.week-col{ text-align:center; }
+   #riskHeatmapTable td{ padding:6px 8px; border-bottom:1px solid #F1F5F8; }
+   .heat-cell{ width:36px; height:26px; border-radius:6px; margin:0 auto; }
+   .heat-cell.over{ backgrounnd:var(--beige); }
+   .heat-cell.under{ backgroud:#EEF3F7; }
+   .heat-cell.na{ backgrounnd:transparent; border:1px dashed var(--border);}
 .footer-note{ margin-top:16px; font-size:11px; color:var(--muted); font-weight:600; }
 
 .error-banner{
@@ -308,10 +316,9 @@ tbody tr:last-child td{ border-bottom:none; }
       <h2>위험군 상세 (연속 52시간 근무자)</h2>
       <span class="panel-note">2주 이상 연속 52시간</span>
     </div>
-    <table>
-      <thead><tr><th>이름</th><th>부서</th><th>직급</th><th>연속 52시간</th><th>이번 주 근무시간</th></tr></thead>
-      <tbody id="riskTableBody"></tbody>
-    </table>
+    <div class="heatmap-wrap">
+      <table id="riskHeatmapTable"></table>table>
+    </div>
   </div>
 
   <p class="footer-note">※ CSV 불러오기로 실제 주간 근무시간 확정 데이터를 불러올 수 있습니다. 근태예외자·임원급(상무·전무·부사장·전문위원)은 자동 제외됩니다. (열 이름: No./구분/년월/주차/사번/이름/직급/사업장/부서명/월~일/주확정근무시간/평일확정근무시간/법정휴게시간/비업무_기타/비업무/비업무(중식), 시간은 분 단위)</p>
@@ -1804,7 +1811,7 @@ function resetDisplay(){
     const el = document.getElementById(id); if(el) el.innerHTML = '&nbsp;';
   });
   document.getElementById('donut').style.background = '#EAF0F5';
-  ['deptRanking','bucketPie','siteRanking','weekdayChart','weekendStat','riskTableBody','trendChart','trendLabels'].forEach(id=>{
+  ['deptRanking','bucketPie','siteRanking','weekdayChart','weekendStat','riskHeatmapTable','trendChart','trendLabels'].forEach(id=>{
     const el = document.getElementById(id); if(el) el.innerHTML = '';
   });
 }
@@ -2141,18 +2148,17 @@ function renderRiskTable(rows, weekKeys, latest){
     if(!byEmp[r['사번']]) byEmp[r['사번']] = { name:r['이름'], team:r['부서명'], rank:r['직급'], weeks:{} };
     byEmp[r['사번']].weeks[r._week] = r._Q;
   });
-  const reversedWeeks = [...weekKeys].reverse();
+  const reversedAll = [...weekKeysFull].reverse();
   const risk = [];
   Object.values(byEmp).forEach(e => {
     let streak = 0;
-    for(const wk of reversedWeeks){
+    for(const wk of reversedAll){
       const q = e.weeks[wk];
       if(q !== undefined && q >= 52) streak++;
       else break;
     }
     if(streak >= 2){
       risk.push({ ...e, streak, latestQ: e.weeks[latest] });
-    }
   });
   risk.sort((a,b) => b.streak - a.streak || (b.latestQ||0) - (a.latestQ||0));
 
@@ -2160,14 +2166,37 @@ function renderRiskTable(rows, weekKeys, latest){
   const maxStreak = risk.length ? Math.max(...risk.map(r=>r.streak)) : 0;
   document.getElementById('kpiRiskSub').textContent = maxStreak>=3 ? `${maxStreak}주 연속 52시간 포함` : '\u00A0';
 
-  const tagClass = (n) => n>=4 ? 'w4' : n>=3 ? 'w3' : 'w2';
-  const tbody = document.getElementById('riskTableBody');
-  tbody.innerHTML = risk.slice(0,20).map(r => `
-    <tr><td>${r.name}</td><td>${r.team}</td><td>${r.rank}</td>
-      <td><span class="tag ${tagClass(r.streak)}">${r.streak}주</span></td>
-      <td>${fmt1(r.latestQ||0)}</td></tr>
-  `).join('') || '<tr><td colspan="5" style="color:var(--muted);">해당자가 없습니다.</td></tr>';
-}
+  const table = document.getElementById('riskHeatmapTable');
+  const weekLabels = weekKeys.map(wk=>{
+   const [yyyymm,wn]=wk.split('-');
+   return '${yyyymm.slice(4,6)}/${parseInt(wn,10)}주`;
+  });
+   
+  const headerHtml=`<thead><tr>
+   <th>이름</th><th>부서</th><th>직급</th>
+   ${weekLabels.map(l=>`<th class="week-col">${l}</th>`).join('')}
+   <th>연속</th>
+  </tr></thead>`;
+
+   const bodyHTml=risk.slice(0,20).map(r=>{
+      const cells=weekKeys.map(wk=>{
+         const q=r.weeks[wk]
+         let cls='na',title='데이터 없음';
+         if(q!==undefined){
+            cls=q>=52?'over':'under';
+            title=`${fmt1(q)}시간`;
+         }
+         return `<td><div class="heat-cell ${cls}" title="${title}"></div></td>`;
+      }).join('');
+      const tagClass=r.streak>=4?'w4':r.streak>=3?'w3':'w2';
+      return `<tr>
+         <td>${r.name}</td><td>${r.team}</td><td>${r.rank}</td>
+         ${cells}
+         <td><span class="tag ${tagClass}">${r.streak}주</span></td>
+      </tr>`;
+   }).join('') || `<tr><td colspan="${4+weekKeys.length}" style="color:var(--muted);">해당자가 없습니다.</td></tr>`;
+
+   table.innerHTML=headerHtml+`<tbody>${bodyHtml}</tbody>`;
 
 /* ===================== 설정 패널 ===================== */
 const DEFAULT_COLORS = { brown:'#0D2744', steel:'#53728A', skyblue:'#7691AD', beige:'#B9CFDD', clay:'#E2646C' };
